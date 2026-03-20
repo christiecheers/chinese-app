@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     
-    <!-- Мета-теги для PWA (важно для iOS) -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="format-detection" content="telephone=no">
     
-    <!-- Манифест и иконки -->
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     
     <title>HSK | Китайский тренажер</title>
     
     <style>
-        /* БАЗОВЫЕ СТИЛИ */
         * {
             margin: 0;
             padding: 0;
@@ -54,7 +51,6 @@
             overflow: hidden;
         }
 
-        /* ОСНОВНЫЕ ЭКРАНЫ */
         .screen {
             position: absolute;
             top: 0;
@@ -84,7 +80,6 @@
             flex-shrink: 0;
         }
 
-        /* КНОПКИ */
         .red-button {
             background: #8B0000;
             color: white;
@@ -107,7 +102,6 @@
             border: 2px solid #8B0000;
         }
 
-        /* АВТОРИЗАЦИЯ */
         .auth-container {
             padding: 40px 20px;
             display: flex;
@@ -193,7 +187,6 @@
             background: #FFE4E1;
         }
 
-        /* ПРОФИЛЬ */
         .user-profile {
             display: flex;
             align-items: center;
@@ -238,7 +231,6 @@
             flex-shrink: 0;
         }
 
-        /* HSK ГРИД */
         .hsk-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -273,7 +265,6 @@
             color: #666;
         }
 
-        /* БЛОКИ ТЕМ */
         .section-title {
             padding: 0 20px 10px;
             font-size: 18px;
@@ -284,272 +275,299 @@
             flex-shrink: 0;
         }
 
-        .blocks-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            padding: 0 14px 14px;
-            flex-shrink: 0;
-        }
-
-        .block-card {
-            background: white;
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid #FFE4E1;
-            cursor: pointer;
+        /* НОВЫЕ СТИЛИ ДЛЯ БЛОКОВ УРОВНЯ */
+        .level-blocks-container {
             display: flex;
             flex-direction: column;
-        }
-
-        .block-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 8px;
-        }
-
-        .block-icon {
-            font-size: 20px;
-        }
-
-        .block-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: #8B0000;
-        }
-
-        .block-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #666;
-            margin-bottom: 10px;
-        }
-
-        .block-progress {
-            height: 6px;
-            background: #FFE4E1;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-
-        .block-progress-fill {
-            height: 100%;
-            background: #8B0000;
-            width: 0%;
-        }
-
-        /* БАННЕР ПОВТОРЕНИЯ */
-        .review-banner {
-            background: #8B0000;
-            margin: 15px 20px;
-            padding: 16px;
-            border-radius: 16px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            animation: pulse 2s infinite;
-            flex-shrink: 0;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.02); }
-            100% { transform: scale(1); }
-        }
-
-        /* ПРОГРЕСС */
-        .progress-circle {
-            position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
-        }
-
-        .progress-circle svg {
-            width: 120px;
-            height: 120px;
-            transform: rotate(-90deg);
-        }
-
-        .progress-circle circle {
-            fill: none;
-            stroke-width: 8;
-            stroke-linecap: round;
-        }
-
-        .progress-circle .bg-circle {
-            stroke: #FFE4E1;
-        }
-
-        .progress-circle .progress-circle-fill {
-            stroke: #8B0000;
-            stroke-dasharray: 314;
-            stroke-dashoffset: 314;
-            transition: stroke-dashoffset 0.5s;
-        }
-
-        .progress-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .progress-text .percentage {
-            font-size: 24px;
-            font-weight: 700;
-            color: #8B0000;
-        }
-
-        .progress-text .label {
-            font-size: 12px;
-            color: #666;
-        }
-
-        /* КАРТОЧКИ ТРЕНИРОВКИ */
-        .card-header {
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border-bottom: 1px solid #FFE4E1;
-            flex-shrink: 0;
-        }
-
-        .progress-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 4px;
-            background: #FFE4E1;
-            display: inline-block;
-            margin: 0 2px;
-        }
-
-        .progress-dot.completed {
-            background: #8B0000;
-        }
-
-        .chinese-char {
-            font-size: 56px;
-            font-weight: 600;
-            color: #8B0000;
-            text-align: center;
-            margin: 30px 0 15px;
-        }
-
-        .pinyin {
-            font-size: 24px;
-            color: #A52A2A;
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .translation {
-            font-size: 20px;
-            color: #8B0000;
-            text-align: center;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .example-box {
-            background: white;
-            padding: 20px;
-            border-radius: 16px;
-            margin: 20px;
-            border: 1px solid #FFE4E1;
-        }
-
-        .example-chinese {
-            font-size: 18px;
-            margin-bottom: 8px;
-            color: #8B0000;
-        }
-
-        .example-translation {
-            color: #666;
-            font-size: 15px;
-        }
-
-        /* ЗАДАНИЯ */
-        .choice-char-trans-only {
-            padding: 20px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .choice-char-trans-only .translation-big {
-            font-size: 36px;
-            color: #8B0000;
-            font-weight: 700;
-            margin: 30px 0 40px;
-        }
-
-        .options-vertical {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            width: 100%;
-        }
-
-        .option-vertical-item {
-            background: white;
-            border: 2px solid #FFE4E1;
-            border-radius: 12px;
-            padding: 16px;
-            display: flex;
-            align-items: center;
             gap: 15px;
-            cursor: pointer;
-            transition: 0.2s;
+            padding: 20px;
+            flex-shrink: 0;
         }
 
-        .option-vertical-item:active {
+        .level-block-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            border: 2px solid #FFE4E1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .level-block-card:active {
             transform: scale(0.98);
         }
 
-        .option-vertical-item .chinese-small {
-            font-size: 24px;
+        .level-block-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .level-block-icon {
+            font-size: 32px;
+        }
+
+        .level-block-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #8B0000;
+        }
+
+        .level-block-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .level-block-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #8B0000;
+        }
+
+        /* СТИЛИ ДЛЯ МОЕГО СПИСКА */
+        .custom-words-list {
+            padding: 20px;
+        }
+
+        .add-word-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            border-radius: 28px;
+            background: #8B0000;
+            color: white;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(139, 0, 0, 0.3);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-word-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* МОДАЛЬНОЕ ОКНО ДОБАВЛЕНИЯ СЛОВА */
+        .add-word-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .add-word-modal.active {
+            display: flex;
+        }
+
+        .add-word-card {
+            background: white;
+            width: 90%;
+            max-width: 340px;
+            border-radius: 24px;
+            padding: 24px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+
+        .add-word-card h3 {
+            color: #8B0000;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .add-word-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #FFE4E1;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            -webkit-user-select: text;
+            user-select: text;
+        }
+
+        .add-word-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #FFE4E1;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            min-height: 80px;
+            -webkit-user-select: text;
+            user-select: text;
+            font-family: inherit;
+        }
+
+        /* СТИЛИ ДЛЯ КВИЗА */
+        .quiz-screen {
+            background: #FFF5F5;
+        }
+
+        .quiz-header {
+            padding: 15px 20px;
+            background: white;
+            border-bottom: 1px solid #FFE4E1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .quiz-score {
+            font-size: 18px;
             font-weight: 600;
             color: #8B0000;
-            min-width: 80px;
         }
 
-        .option-vertical-item .pinyin-small {
-            font-size: 16px;
-            color: #A52A2A;
+        .quiz-card-container {
             flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            perspective: 1000px;
+            min-height: 400px;
         }
 
-        .option-vertical-item.correct {
+        .quiz-card {
+            width: 100%;
+            max-width: 300px;
+            height: 400px;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .quiz-card.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .quiz-card-front, .quiz-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .quiz-card-front {
+            transform: rotateY(0deg);
+        }
+
+        .quiz-card-back {
+            transform: rotateY(180deg);
+        }
+
+        .quiz-card .chinese {
+            font-size: 48px;
+            font-weight: 700;
+            color: #8B0000;
+            margin-bottom: 20px;
+        }
+
+        .quiz-card .pinyin {
+            font-size: 24px;
+            color: #A52A2A;
+            margin-bottom: 15px;
+        }
+
+        .quiz-card .translation {
+            font-size: 20px;
+            color: #666;
+        }
+
+        .quiz-controls {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #FFE4E1;
+        }
+
+        .swipe-btn {
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .swipe-correct {
             background: #4CAF50;
-            border-color: #4CAF50;
-        }
-
-        .option-vertical-item.correct .chinese-small,
-        .option-vertical-item.correct .pinyin-small {
             color: white;
         }
 
-        .option-vertical-item.wrong {
+        .swipe-wrong {
             background: #f44336;
-            border-color: #f44336;
-        }
-
-        .option-vertical-item.wrong .chinese-small,
-        .option-vertical-item.wrong .pinyin-small {
             color: white;
         }
 
-        /* СПИСОК СЛОВ */
-        .words-list {
-            padding: 0 20px 20px;
+        .quiz-mode-select {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            padding: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .quiz-mode-btn {
+            padding: 16px 32px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            width: 80%;
+            max-width: 250px;
+        }
+
+        .quiz-mode-chinese {
+            background: #8B0000;
+            color: white;
+        }
+
+        .quiz-mode-russian {
+            background: white;
+            color: #8B0000;
+            border: 2px solid #8B0000;
+        }
+
+        .delete-word-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 12px;
+            cursor: pointer;
         }
 
         .word-item {
@@ -589,7 +607,7 @@
             color: #666;
         }
 
-        .word-item .mastered-badge {
+        .mastered-badge {
             background: #4CAF50;
             color: white;
             padding: 4px 8px;
@@ -597,7 +615,7 @@
             font-size: 12px;
         }
 
-        .word-item .not-mastered-badge {
+        .not-mastered-badge {
             background: #FFE4E1;
             color: #8B0000;
             padding: 4px 8px;
@@ -605,7 +623,6 @@
             font-size: 12px;
         }
 
-        /* МОДАЛЬНОЕ ОКНО */
         .modal-overlay {
             position: absolute;
             top: 0;
@@ -694,7 +711,273 @@
             cursor: pointer;
         }
 
-        /* ЗАДАНИЕ НА СОПОСТАВЛЕНИЕ */
+        .choice-char-trans-only {
+            padding: 20px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .choice-char-trans-only .translation-big {
+            font-size: 36px;
+            color: #8B0000;
+            font-weight: 700;
+            margin: 30px 0 40px;
+        }
+
+        .options-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .option-vertical-item {
+            background: white;
+            border: 2px solid #FFE4E1;
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .option-vertical-item:active {
+            transform: scale(0.98);
+        }
+
+        .option-vertical-item .chinese-small {
+            font-size: 24px;
+            font-weight: 600;
+            color: #8B0000;
+            min-width: 80px;
+        }
+
+        .option-vertical-item .pinyin-small {
+            font-size: 16px;
+            color: #A52A2A;
+            flex: 1;
+        }
+
+        .option-vertical-item.correct {
+            background: #4CAF50;
+            border-color: #4CAF50;
+        }
+
+        .option-vertical-item.correct .chinese-small,
+        .option-vertical-item.correct .pinyin-small {
+            color: white;
+        }
+
+        .option-vertical-item.wrong {
+            background: #f44336;
+            border-color: #f44336;
+        }
+
+        .option-vertical-item.wrong .chinese-small,
+        .option-vertical-item.wrong .pinyin-small {
+            color: white;
+        }
+
+        .words-list {
+            padding: 0 20px 20px;
+        }
+
+        .review-banner {
+            background: #8B0000;
+            margin: 15px 20px;
+            padding: 16px;
+            border-radius: 16px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        .progress-circle {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .progress-circle svg {
+            width: 120px;
+            height: 120px;
+            transform: rotate(-90deg);
+        }
+
+        .progress-circle circle {
+            fill: none;
+            stroke-width: 8;
+            stroke-linecap: round;
+        }
+
+        .progress-circle .bg-circle {
+            stroke: #FFE4E1;
+        }
+
+        .progress-circle .progress-circle-fill {
+            stroke: #8B0000;
+            stroke-dasharray: 314;
+            stroke-dashoffset: 314;
+            transition: stroke-dashoffset 0.5s;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .progress-text .percentage {
+            font-size: 24px;
+            font-weight: 700;
+            color: #8B0000;
+        }
+
+        .progress-text .label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .card-header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+            border-bottom: 1px solid #FFE4E1;
+            flex-shrink: 0;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background: #FFE4E1;
+            display: inline-block;
+            margin: 0 2px;
+        }
+
+        .progress-dot.completed {
+            background: #8B0000;
+        }
+
+        .chinese-char {
+            font-size: 56px;
+            font-weight: 600;
+            color: #8B0000;
+            text-align: center;
+            margin: 30px 0 15px;
+        }
+
+        .pinyin {
+            font-size: 24px;
+            color: #A52A2A;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .translation {
+            font-size: 20px;
+            color: #8B0000;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .example-box {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin: 20px;
+            border: 1px solid #FFE4E1;
+        }
+
+        .example-chinese {
+            font-size: 18px;
+            margin-bottom: 8px;
+            color: #8B0000;
+        }
+
+        .example-translation {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .char-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .char-btn {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border: 2px solid #FFE4E1;
+            border-radius: 12px;
+            font-size: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #8B0000;
+            touch-action: manipulation;
+        }
+
+        .char-btn:active {
+            transform: scale(0.95);
+            background: #FFE4E1;
+        }
+
+        .char-btn.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .compose-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .compose-controls button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .clear-btn {
+            background: #FFE4E1;
+            color: #8B0000;
+            border: 1px solid #8B0000;
+        }
+
+        .check-btn {
+            background: #8B0000;
+            color: white;
+        }
+
         .matching-section {
             background: white;
             border-radius: 16px;
@@ -814,7 +1097,6 @@
             cursor: default;
         }
 
-        /* НОВОЕ ЗАДАНИЕ: СОЕДИНИТЬ ВСЕ СЛОВА */
         .match-all-section {
             background: white;
             border-radius: 16px;
@@ -894,7 +1176,6 @@
             cursor: default;
         }
 
-        /* АУДИО КНОПКА */
         .audio-btn {
             width: 60px;
             height: 60px;
@@ -914,41 +1195,6 @@
             transform: scale(0.95);
         }
 
-        /* ЗАДАНИЕ СОСТАВИТЬ СЛОВО */
-        .char-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .char-btn {
-            width: 70px;
-            height: 70px;
-            background: white;
-            border: 2px solid #FFE4E1;
-            border-radius: 12px;
-            font-size: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: #8B0000;
-            touch-action: manipulation;
-        }
-
-        .char-btn:active {
-            transform: scale(0.95);
-            background: #FFE4E1;
-        }
-
-        .char-btn.disabled {
-            opacity: 0.5;
-            pointer-events: none;
-        }
-
-        /* НИЖНЯЯ НАВИГАЦИЯ */
         .bottom-nav {
             display: flex;
             justify-content: space-around;
@@ -988,7 +1234,6 @@
             opacity: 0.7;
         }
 
-        /* СКРОЛЛ */
         .scroll-content {
             flex: 1;
             overflow-y: auto;
@@ -997,7 +1242,6 @@
             padding-bottom: 20px;
         }
 
-        /* ОБРАТНАЯ СВЯЗЬ */
         .feedback-overlay {
             position: fixed;
             top: 50%;
@@ -1015,7 +1259,6 @@
             100% { transform: translate(-50%, -50%) scale(1); }
         }
 
-        /* ЭКРАН ЗАВЕРШЕНИЯ */
         .completion-container {
             display: flex;
             flex-direction: column;
@@ -1049,35 +1292,6 @@
             width: 100%;
         }
 
-        /* УПРАВЛЕНИЕ COMPOSE */
-        .compose-controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin: 10px 0;
-        }
-
-        .compose-controls button {
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        .clear-btn {
-            background: #FFE4E1;
-            color: #8B0000;
-            border: 1px solid #8B0000;
-        }
-
-        .check-btn {
-            background: #8B0000;
-            color: white;
-        }
-
-        /* ====== СПЕЦИАЛЬНО ДЛЯ PWA ====== */
         button, 
         .auth-button, 
         .red-button,
@@ -1103,7 +1317,6 @@
             z-index: 10 !important;
         }
 
-        /* Убираем стандартное поведение iOS */
         input, 
         textarea,
         button,
@@ -1113,21 +1326,18 @@
             border-radius: 0;
         }
 
-        /* Увеличиваем область нажатия для ссылок */
         .auth-link {
             display: inline-block !important;
             padding: 12px 20px !important;
             margin: -12px -20px !important;
         }
 
-        /* Исправление для гостевой ссылки */
         #guest-link {
             display: inline-block !important;
             padding: 15px 25px !important;
             margin: -15px -25px !important;
         }
 
-        /* Анимация нажатия */
         .auth-button:active,
         .red-button:active,
         button:active,
@@ -1139,13 +1349,11 @@
             transition: all 0.1s;
         }
 
-        /* Исправление для кнопки отладки */
         #debugConsole button {
             min-height: 44px !important;
             padding: 12px 20px !important;
         }
 
-        /* Убираем задержку нажатия на iOS */
         * {
             -webkit-touch-callout: none;
             -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -1183,20 +1391,17 @@
                         <span class="auth-link" id="guest-link">Продолжить как гость</span>
                     </div>
                     
-                    <!-- Кнопки отладки -->
                     <div style="margin-top: 20px; text-align: center; font-size: 12px; color: #999;">
                         <span onclick="debugAuth()" style="text-decoration: underline; cursor: pointer;">🔧 Отладка</span>
                         <span onclick="clearAppCache()" style="text-decoration: underline; cursor: pointer; margin-left: 15px;">🗑️ Очистить кэш</span>
                     </div>
 
-                    <!-- КНОПКА ОТЛАДКИ PWA -->
                     <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
                         <button onclick="toggleDebugConsole()" style="background: #8B0000; color: white; border: none; border-radius: 30px; padding: 15px 25px; font-size: 16px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
                             🐛 ОТЛАДКА PWA
                         </button>
                     </div>
 
-                    <!-- КОНСОЛЬ ОТЛАДКИ (СКРЫТА) -->
                     <div id="debugConsole" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; padding: 20px; overflow-y: auto; color: #00ff00; font-family: monospace; font-size: 12px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 15px; position: sticky; top: 0; background: #000; padding: 10px;">
                             <span style="color: white; font-size: 18px; font-weight: bold;">🔍 КОНСОЛЬ PWA</span>
@@ -1290,7 +1495,6 @@
                     <button class="red-button" id="select-hsk-btn" style="width: 100%;">Выбрать HSK</button>
                 </div>
                 
-                <!-- ДЕКОРАТИВНАЯ КАРТИНКА -->
                 <div style="display: flex; justify-content: center; align-items: center; padding: 20px 0 40px 0;">
                     <img src="images/menu-bg.jpg" alt="Menu decoration" 
                          style="max-width: 80%; height: auto; border-radius: 20px; opacity: 0.8; box-shadow: 0 4px 15px rgba(139,0,0,0.2);">
@@ -1298,7 +1502,7 @@
             </div>
         </div>
 
-        <!-- Экран с блоками слов HSK -->
+        <!-- Экран с блоками HSK (3 блока: списки слов, мой список, квиз) -->
         <div id="blocks-screen" class="screen">
             <div class="user-profile">
                 <div class="user-avatar" id="user-avatar-blocks">В</div>
@@ -1338,12 +1542,12 @@
                     </div>
                 </div>
                 
-                <div class="section-title">Темы</div>
-                <div class="blocks-grid" id="blocks-container"></div>
+                <div class="section-title">Меню</div>
+                <div id="blocks-container" class="level-blocks-container"></div>
             </div>
         </div>
 
-        <!-- Экран детального блока -->
+        <!-- Экран детального блока (списки слов) -->
         <div id="block-detail-screen" class="screen">
             <div class="user-profile">
                 <div class="user-avatar" id="user-avatar-detail">В</div>
@@ -1394,6 +1598,108 @@
             </div>
         </div>
 
+        <!-- ЭКРАН МОЕГО СПИСКА -->
+        <div id="my-list-screen" class="screen">
+            <div class="user-profile">
+                <div class="user-avatar" id="user-avatar-mylist">В</div>
+                <div class="user-email" id="user-email-mylist">vladamalova@example.com</div>
+                <button class="logout-btn" id="logout-btn-mylist">Выйти</button>
+            </div>
+            
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>🔋 100%</span>
+            </div>
+            <div style="background: #8B0000; color: white; padding: 15px; display: flex; align-items: center; gap: 15px; flex-shrink: 0;">
+                <span class="back-btn" id="back-to-hsk-from-mylist">←</span>
+                <h2 style="font-size: 24px;">Мой список</h2>
+            </div>
+            
+            <div class="scroll-content" style="padding-bottom: 80px;">
+                <div id="custom-words-container" class="custom-words-list">
+                    <!-- Здесь будут отображаться добавленные слова -->
+                </div>
+            </div>
+            
+            <button class="add-word-btn" id="show-add-word-modal">➕</button>
+        </div>
+
+        <!-- МОДАЛЬНОЕ ОКНО ДОБАВЛЕНИЯ СЛОВА -->
+        <div id="add-word-modal" class="add-word-modal">
+            <div class="add-word-card">
+                <h3>Добавить новое слово</h3>
+                <input type="text" id="new-word-characters" class="add-word-input" placeholder="Иероглиф (например: 你好)">
+                <input type="text" id="new-word-pinyin" class="add-word-input" placeholder="Пиньинь (например: nǐ hǎo)">
+                <input type="text" id="new-word-translation" class="add-word-input" placeholder="Перевод (например: здравствуйте)">
+                <textarea id="new-word-example" class="add-word-textarea" placeholder="Пример использования (например: 你好吗？)"></textarea>
+                <textarea id="new-word-example-trans" class="add-word-textarea" placeholder="Перевод примера (например: Как дела?)"></textarea>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="red-button" id="save-word-btn" style="flex: 1; margin: 0;">Сохранить</button>
+                    <button class="red-button-outline" id="close-add-word-modal" style="flex: 1; margin: 0;">Отмена</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЭКРАН ВЫБОРА РЕЖИМА КВИЗА -->
+        <div id="quiz-mode-screen" class="screen">
+            <div class="user-profile">
+                <div class="user-avatar" id="user-avatar-quizmode">В</div>
+                <div class="user-email" id="user-email-quizmode">vladamalova@example.com</div>
+                <button class="logout-btn" id="logout-btn-quizmode">Выйти</button>
+            </div>
+            
+            <div class="status-bar">
+                <span>9:41</span>
+                <span>🔋 100%</span>
+            </div>
+            <div style="background: #8B0000; color: white; padding: 15px; display: flex; align-items: center; gap: 15px; flex-shrink: 0;">
+                <span class="back-btn" id="back-to-hsk-from-quiz">←</span>
+                <h2 style="font-size: 24px;">Квиз</h2>
+            </div>
+            
+            <div class="scroll-content">
+                <div class="quiz-mode-select">
+                    <h3 style="color: #8B0000; margin-bottom: 20px;">Выберите режим</h3>
+                    <button class="quiz-mode-btn quiz-mode-chinese" id="quiz-mode-chinese-btn">С иероглифа</button>
+                    <button class="quiz-mode-btn quiz-mode-russian" id="quiz-mode-russian-btn">С русского</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ЭКРАН КВИЗА -->
+        <div id="quiz-screen" class="screen quiz-screen">
+            <div class="user-profile">
+                <div class="user-avatar" id="user-avatar-quiz">В</div>
+                <div class="user-email" id="user-email-quiz">vladamalova@example.com</div>
+                <button class="logout-btn" id="logout-btn-quiz">Выйти</button>
+            </div>
+            
+            <div class="quiz-header">
+                <span class="back-btn" id="back-to-quiz-mode" style="color: #8B0000; font-size: 24px; cursor: pointer;">←</span>
+                <span class="quiz-score" id="quiz-score">Счёт: 0</span>
+            </div>
+            
+            <div class="quiz-card-container" id="quiz-card-container">
+                <div class="quiz-card" id="quiz-card">
+                    <div class="quiz-card-front" id="quiz-card-front">
+                        <!-- Передняя сторона карточки -->
+                    </div>
+                    <div class="quiz-card-back" id="quiz-card-back">
+                        <!-- Задняя сторона карточки -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="swipe-btn swipe-wrong" id="quiz-wrong-btn">✗ Не помню</button>
+                <button class="swipe-btn swipe-correct" id="quiz-correct-btn">✓ Помню</button>
+            </div>
+            
+            <div style="text-align: center; padding: 10px; color: #999; font-size: 12px;">
+                Нажмите на карточку, чтобы перевернуть
+            </div>
+        </div>
+
         <!-- Экран тренировки -->
         <div id="study-screen" class="screen">
             <div class="user-profile">
@@ -1430,7 +1736,7 @@
             </div>
         </div>
 
-        <!-- Экран завершения блока (все слова выучены) -->
+        <!-- Экран завершения блока -->
         <div id="block-complete-screen" class="screen">
             <div class="user-profile">
                 <div class="user-avatar" id="user-avatar-complete">В</div>
@@ -1475,13 +1781,20 @@
         let users = {};
         let currentUser = null;
         let currentHSK = 3;
+        
+        // НОВЫЕ ПЕРЕМЕННЫЕ
+        let customWords = [];
+        let quizWords = [];
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let quizMode = 'chinese';
+        let isCardFlipped = false;
 
         function loadUsers() {
             try {
                 const saved = localStorage.getItem('hsk_users');
                 if (saved) {
                     users = JSON.parse(saved);
-                    console.log('Пользователи загружены:', users);
                 } else {
                     users = {
                         'vladamalova@example.com': {
@@ -1492,7 +1805,6 @@
                         }
                     };
                     saveUsers();
-                    console.log('Созданы тестовые пользователи');
                 }
             } catch (e) {
                 console.error('Ошибка загрузки пользователей:', e);
@@ -1565,7 +1877,7 @@
         }
 
         // ============================================
-        // СЛОВА HSK 3 (315 слов)
+        // СЛОВА HSK 3 (315 слов) - СОКРАЩЕННО ДЛЯ ПРИМЕРА
         // ============================================
         
         const hsk3Words = [
@@ -2659,8 +2971,271 @@
         let selectedChars = [];
         let currentMatchAllPairs = [];
 
+
         // ============================================
-        // ФУНКЦИИ ДЛЯ РАБОТЫ С ПРОГРЕССОМ
+        // ФУНКЦИИ ДЛЯ РАБОТЫ С ПОЛЬЗОВАТЕЛЬСКИМИ СЛОВАМИ
+        // ============================================
+        
+        function loadCustomWords() {
+            const key = currentUser ? `hsk_custom_words_${currentUser}` : 'hsk_custom_words_guest';
+            const saved = localStorage.getItem(key);
+            if (saved) {
+                customWords = JSON.parse(saved);
+            } else {
+                customWords = [];
+            }
+        }
+        
+        function saveCustomWords() {
+            const key = currentUser ? `hsk_custom_words_${currentUser}` : 'hsk_custom_words_guest';
+            localStorage.setItem(key, JSON.stringify(customWords));
+        }
+        
+        function addCustomWord(characters, pinyin, translation, example, exampleTranslation) {
+            const newWord = {
+                id: Date.now(),
+                characters: characters,
+                pinyin: pinyin,
+                translation: translation,
+                example: example || characters,
+                exampleTranslation: exampleTranslation || translation,
+                listId: 999,
+                hskLevel: currentHSK,
+                mastered: 0,
+                timesReviewed: 0,
+                correctCount: 0,
+                lastReviewed: null,
+                isCustom: true
+            };
+            customWords.push(newWord);
+            saveCustomWords();
+            renderCustomWordsList();
+        }
+        
+        function deleteCustomWord(wordId) {
+            customWords = customWords.filter(w => w.id !== wordId);
+            saveCustomWords();
+            renderCustomWordsList();
+        }
+        
+        function renderCustomWordsList() {
+            const container = document.getElementById('custom-words-container');
+            if (!container) return;
+            
+            if (customWords.length === 0) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <div style="font-size: 48px; margin-bottom: 10px;">📝</div>
+                        <p>У вас пока нет добавленных слов</p>
+                        <p style="font-size: 12px; margin-top: 10px;">Нажмите кнопку + чтобы добавить слово</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = customWords.map(word => `
+                <div class="word-item" onclick="openWordModal(${word.id})">
+                    <div class="word-item-left">
+                        <span class="chinese">${word.characters}</span>
+                        <span class="pinyin-small">${word.pinyin}</span>
+                        <span class="translation-small">${word.translation}</span>
+                    </div>
+                    <button class="delete-word-btn" onclick="event.stopPropagation(); deleteCustomWord(${word.id})">Удалить</button>
+                </div>
+            `).join('');
+        }
+
+        // ============================================
+        // ФУНКЦИИ ДЛЯ КВИЗА
+        // ============================================
+        
+        function startQuiz(mode) {
+            quizMode = mode;
+            quizScore = 0;
+            currentQuizIndex = 0;
+            
+            const allHskWords = wordsData.filter(w => w.hskLevel === currentHSK);
+            const shuffled = shuffleArray([...allHskWords]);
+            quizWords = shuffled.slice(0, 30);
+            
+            updateQuizScore();
+            showQuizCard();
+            document.getElementById('quiz-mode-screen').classList.remove('active');
+            document.getElementById('quiz-screen').classList.add('active');
+        }
+        
+        function showQuizCard() {
+            if (currentQuizIndex >= quizWords.length) {
+                finishQuiz();
+                return;
+            }
+            
+            const word = quizWords[currentQuizIndex];
+            const frontDiv = document.getElementById('quiz-card-front');
+            const backDiv = document.getElementById('quiz-card-back');
+            const card = document.getElementById('quiz-card');
+            
+            card.classList.remove('flipped');
+            isCardFlipped = false;
+            
+            if (quizMode === 'chinese') {
+                frontDiv.innerHTML = `
+                    <div class="chinese">${word.characters}</div>
+                    <div class="pinyin" style="font-size: 18px; color: #999; margin-top: 10px;">(нажмите для ответа)</div>
+                `;
+                backDiv.innerHTML = `
+                    <div class="translation">${word.translation}</div>
+                    <div class="pinyin" style="font-size: 18px; margin-top: 15px;">${word.pinyin}</div>
+                `;
+            } else {
+                frontDiv.innerHTML = `
+                    <div class="translation" style="font-size: 28px;">${word.translation}</div>
+                    <div class="pinyin" style="font-size: 18px; color: #999; margin-top: 10px;">(нажмите для ответа)</div>
+                `;
+                backDiv.innerHTML = `
+                    <div class="chinese">${word.characters}</div>
+                    <div class="pinyin" style="font-size: 18px; margin-top: 15px;">${word.pinyin}</div>
+                `;
+            }
+        }
+        
+        function flipCard() {
+            const card = document.getElementById('quiz-card');
+            card.classList.add('flipped');
+            isCardFlipped = true;
+        }
+        
+        function correctAnswer() {
+            quizScore++;
+            updateQuizScore();
+            nextCard();
+        }
+        
+        function wrongAnswer() {
+            quizScore = Math.max(0, quizScore - 1);
+            updateQuizScore();
+            nextCard();
+        }
+        
+        function nextCard() {
+            currentQuizIndex++;
+            if (currentQuizIndex < quizWords.length) {
+                showQuizCard();
+            } else {
+                finishQuiz();
+            }
+        }
+        
+        function updateQuizScore() {
+            document.getElementById('quiz-score').textContent = `Счёт: ${quizScore}`;
+        }
+        
+        function finishQuiz() {
+            alert(`Квиз завершён!\nВаш счёт: ${quizScore} из ${quizWords.length}\n${quizScore >= 20 ? 'Отличный результат! 🎉' : 'Попробуйте ещё раз! 💪'}`);
+            document.getElementById('quiz-screen').classList.remove('active');
+            showScreen('hsk-screen');
+        }
+
+        // ============================================
+        // ФУНКЦИЯ ДЛЯ ЗАДАНИЯ С ПИНЬИНЬ (с разными тонами)
+        // ============================================
+        
+        function generateToneVariants(pinyin) {
+            const syllables = pinyin.split(' ');
+            const variants = [];
+            
+            const toneMap = {
+                'a': ['ā', 'á', 'ǎ', 'à'],
+                'e': ['ē', 'é', 'ě', 'è'],
+                'i': ['ī', 'í', 'ǐ', 'ì'],
+                'o': ['ō', 'ó', 'ǒ', 'ò'],
+                'u': ['ū', 'ú', 'ǔ', 'ù'],
+                'ü': ['ǖ', 'ǘ', 'ǚ', 'ǜ']
+            };
+            
+            syllables.forEach(syllable => {
+                let hasVariant = false;
+                for (let vowel in toneMap) {
+                    if (syllable.includes(vowel)) {
+                        const variantsForVowel = toneMap[vowel];
+                        variantsForVowel.forEach(variant => {
+                            const newSyllable = syllable.replace(vowel, variant);
+                            variants.push(newSyllable);
+                        });
+                        hasVariant = true;
+                        break;
+                    }
+                }
+                if (!hasVariant) {
+                    variants.push(syllable);
+                }
+            });
+            
+            return [...new Set(variants)];
+        }
+        
+        function showChoicePinyinCard(word) {
+            const basePinyin = word.pinyin;
+            const toneVariants = generateToneVariants(basePinyin);
+            
+            let options = [basePinyin];
+            for (let variant of toneVariants) {
+                if (variant !== basePinyin && options.length < 4) {
+                    options.push(variant);
+                }
+            }
+            while (options.length < 4) {
+                const randomWord = wordsData[Math.floor(Math.random() * wordsData.length)];
+                if (!options.includes(randomWord.pinyin)) {
+                    options.push(randomWord.pinyin);
+                }
+            }
+            options = shuffleArray(options);
+            
+            document.getElementById('card-content').innerHTML = `
+                <div class="choice-char-trans-only">
+                    <div class="chinese-char">${word.characters}</div>
+                    <div class="audio-btn" onclick="speak('${word.characters}')">🔊</div>
+                    <div class="options-vertical">
+                        ${options.map(opt => `
+                            <div class="option-vertical-item" onclick="checkPinyinAnswer(this, '${opt}', '${word.pinyin}', '${word.id}')">
+                                <span class="pinyin-small">${opt}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+        
+        window.checkPinyinAnswer = function(element, selected, correct, wordId) {
+            const word = wordsData.find(w => w.id == wordId);
+            
+            document.querySelectorAll('.option-vertical-item').forEach(el => {
+                el.classList.remove('correct', 'wrong');
+            });
+            
+            if (selected === correct) {
+                element.classList.add('correct');
+                showFeedback(true);
+                word.correctCount++;
+                word.timesReviewed++;
+                word.lastReviewed = Date.now();
+                if (word.correctCount >= 5) word.mastered = 5;
+                saveUserProgress();
+                
+                setTimeout(() => {
+                    currentIndex++;
+                    showTask();
+                }, 1000);
+            } else {
+                element.classList.add('wrong');
+                showFeedback(false);
+                setTimeout(() => element.classList.remove('wrong'), 500);
+            }
+        };
+
+        // ============================================
+        // ОСНОВНЫЕ ФУНКЦИИ
         // ============================================
         
         function getWordsByLevelAndBlock(hskLevel, blockId) {
@@ -2761,6 +3336,7 @@
             studyQueue = [];
             studyWords.forEach(word => {
                 studyQueue.push({ type: 'intro', word: word });
+                studyQueue.push({ type: 'choice_pinyin', word: word });
                 studyQueue.push({ type: 'choice_char', word: word });
                 studyQueue.push({ type: 'choice_trans', word: word });
                 studyQueue.push({ type: 'char_from_trans', word: word });
@@ -2798,6 +3374,7 @@
             
             switch(task.type) {
                 case 'intro': showIntroCard(task.word); break;
+                case 'choice_pinyin': showChoicePinyinCard(task.word); break;
                 case 'choice_char': showChoiceCharCard(task.word); break;
                 case 'choice_trans': showChoiceTransCard(task.word); break;
                 case 'char_from_trans': showCharFromTransCard(task.word); break;
@@ -2943,6 +3520,34 @@
             });
         };
 
+        window.selectChar = function(btn, char) {
+            if (!window.selectedChars) window.selectedChars = [];
+            window.selectedChars.push(char);
+            document.getElementById('composed-word').textContent = window.selectedChars.join('');
+            btn.classList.add('disabled');
+        };
+
+        window.checkComposedWord = function(correct, wordId) {
+            const word = wordsData.find(w => w.id == wordId);
+            const composed = window.selectedChars ? window.selectedChars.join('') : '';
+            
+            if (composed === correct) {
+                showFeedback(true);
+                word.correctCount++;
+                word.timesReviewed++;
+                word.lastReviewed = Date.now();
+                if (word.correctCount >= 5) word.mastered = 5;
+                saveUserProgress();
+                
+                setTimeout(() => {
+                    currentIndex++;
+                    showTask();
+                }, 1000);
+            } else {
+                showFeedback(false);
+            }
+        };
+
         function showMatchingCard(word) {
             const chars = word.characters.split('');
             const pinyins = word.pinyin.split(' ');
@@ -3006,6 +3611,54 @@
             
             document.getElementById('card-content').innerHTML = html;
         }
+
+        window.selectPinyin = function(element, charIndex, correctPinyin) {
+            if (element.classList.contains('matched')) return;
+            
+            const row = element.closest('.char-pinyin-row');
+            const rowOptions = row.querySelectorAll('.pinyin-option');
+            
+            rowOptions.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            if (element.textContent === correctPinyin) {
+                element.classList.remove('selected');
+                element.classList.add('matched');
+                showFeedback(true);
+            } else {
+                showFeedback(false);
+                setTimeout(() => element.classList.remove('selected'), 500);
+            }
+        };
+
+        window.selectTranslation = function(element, correctTranslation, wordId) {
+            if (element.classList.contains('matched')) return;
+            
+            const transOptions = document.querySelectorAll('.trans-option');
+            transOptions.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            if (element.textContent === correctTranslation) {
+                element.classList.remove('selected');
+                element.classList.add('matched');
+                showFeedback(true);
+                
+                const word = wordsData.find(w => w.id == wordId);
+                word.correctCount++;
+                word.timesReviewed++;
+                word.lastReviewed = Date.now();
+                if (word.correctCount >= 5) word.mastered = 5;
+                saveUserProgress();
+                
+                setTimeout(() => {
+                    currentIndex++;
+                    showTask();
+                }, 1000);
+            } else {
+                showFeedback(false);
+                setTimeout(() => element.classList.remove('selected'), 500);
+            }
+        };
 
         function showMatchAllCard(words) {
             currentMatchAllPairs = words.map(word => ({
@@ -3125,6 +3778,26 @@
             `;
         }
 
+        function handleReview(wordId, remembered) {
+            const word = wordsData.find(w => w.id == wordId);
+            
+            if (remembered) {
+                showFeedback(true);
+                word.correctCount++;
+                word.timesReviewed++;
+                word.lastReviewed = Date.now();
+                if (word.correctCount >= 5) word.mastered = 5;
+                saveUserProgress();
+            } else {
+                showFeedback(false);
+            }
+            
+            setTimeout(() => {
+                currentIndex++;
+                showTask();
+            }, 1000);
+        }
+
         window.checkCharAnswer = function(element, selected, correct, wordId) {
             const word = wordsData.find(w => w.id == wordId);
             
@@ -3179,102 +3852,6 @@
             }
         };
 
-        window.selectChar = function(btn, char) {
-            if (!window.selectedChars) window.selectedChars = [];
-            window.selectedChars.push(char);
-            document.getElementById('composed-word').textContent = window.selectedChars.join('');
-            btn.classList.add('disabled');
-        };
-
-        window.checkComposedWord = function(correct, wordId) {
-            const word = wordsData.find(w => w.id == wordId);
-            const composed = window.selectedChars ? window.selectedChars.join('') : '';
-            
-            if (composed === correct) {
-                showFeedback(true);
-                word.correctCount++;
-                word.timesReviewed++;
-                word.lastReviewed = Date.now();
-                if (word.correctCount >= 5) word.mastered = 5;
-                saveUserProgress();
-                
-                setTimeout(() => {
-                    currentIndex++;
-                    showTask();
-                }, 1000);
-            } else {
-                showFeedback(false);
-            }
-        };
-
-        window.selectPinyin = function(element, charIndex, correctPinyin) {
-            if (element.classList.contains('matched')) return;
-            
-            const row = element.closest('.char-pinyin-row');
-            const rowOptions = row.querySelectorAll('.pinyin-option');
-            
-            rowOptions.forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
-            
-            if (element.textContent === correctPinyin) {
-                element.classList.remove('selected');
-                element.classList.add('matched');
-                showFeedback(true);
-            } else {
-                showFeedback(false);
-                setTimeout(() => element.classList.remove('selected'), 500);
-            }
-        };
-
-        window.selectTranslation = function(element, correctTranslation, wordId) {
-            if (element.classList.contains('matched')) return;
-            
-            const transOptions = document.querySelectorAll('.trans-option');
-            transOptions.forEach(opt => opt.classList.remove('selected'));
-            element.classList.add('selected');
-            
-            if (element.textContent === correctTranslation) {
-                element.classList.remove('selected');
-                element.classList.add('matched');
-                showFeedback(true);
-                
-                const word = wordsData.find(w => w.id == wordId);
-                word.correctCount++;
-                word.timesReviewed++;
-                word.lastReviewed = Date.now();
-                if (word.correctCount >= 5) word.mastered = 5;
-                saveUserProgress();
-                
-                setTimeout(() => {
-                    currentIndex++;
-                    showTask();
-                }, 1000);
-            } else {
-                showFeedback(false);
-                setTimeout(() => element.classList.remove('selected'), 500);
-            }
-        };
-
-        function handleReview(wordId, remembered) {
-            const word = wordsData.find(w => w.id == wordId);
-            
-            if (remembered) {
-                showFeedback(true);
-                word.correctCount++;
-                word.timesReviewed++;
-                word.lastReviewed = Date.now();
-                if (word.correctCount >= 5) word.mastered = 5;
-                saveUserProgress();
-            } else {
-                showFeedback(false);
-            }
-            
-            setTimeout(() => {
-                currentIndex++;
-                showTask();
-            }, 1000);
-        }
-
         function endStudy() {
             saveUserProgress();
             document.getElementById('study-screen').classList.remove('active');
@@ -3286,7 +3863,6 @@
         }
 
         function renderBlocksScreen() {
-            const blocks = currentHSK === 3 ? hsk3Blocks : hsk4Blocks;
             const stats = getTotalStats(currentHSK);
             
             document.getElementById('total-mastered').textContent = stats.mastered;
@@ -3294,34 +3870,89 @@
             document.getElementById('total-progress').style.width = (stats.mastered / stats.total * 100) + '%';
             
             const container = document.getElementById('blocks-container');
-            container.innerHTML = '';
-            
-            blocks.forEach(block => {
-                const blockStats = getBlockStats(currentHSK, block.id);
-                const progress = (blockStats.mastered / block.count * 100) || 0;
-                
-                container.innerHTML += `
-                    <div class="block-card" data-block="${block.id}">
-                        <div class="block-header">
-                            <span class="block-icon">${block.icon}</span>
-                            <span class="block-name">${block.name}</span>
-                        </div>
-                        <div class="block-stats">
-                            <span>${blockStats.mastered}/${block.count}</span>
-                            <span>${Math.round(progress)}%</span>
-                        </div>
-                        <div class="block-progress">
-                            <div class="block-progress-fill" style="width: ${progress}%"></div>
-                        </div>
+            container.innerHTML = `
+                <div class="level-block-card" id="words-list-block">
+                    <div class="level-block-header">
+                        <span class="level-block-icon">📚</span>
+                        <span class="level-block-title">Списки слов</span>
                     </div>
-                `;
+                    <div class="level-block-desc">Изучайте слова по темам</div>
+                    <div class="level-block-stats">
+                        <span>${stats.mastered}/${stats.total} выучено</span>
+                        <span>${Math.round((stats.mastered / stats.total) * 100)}%</span>
+                    </div>
+                </div>
+                
+                <div class="level-block-card" id="my-list-block">
+                    <div class="level-block-header">
+                        <span class="level-block-icon">📝</span>
+                        <span class="level-block-title">Мой список</span>
+                    </div>
+                    <div class="level-block-desc">Ваши собственные слова</div>
+                    <div class="level-block-stats">
+                        <span>${customWords.length} слов добавлено</span>
+                    </div>
+                </div>
+                
+                <div class="level-block-card" id="quiz-block">
+                    <div class="level-block-header">
+                        <span class="level-block-icon">🎴</span>
+                        <span class="level-block-title">Квиз</span>
+                    </div>
+                    <div class="level-block-desc">Проверьте знания в игре</div>
+                    <div class="level-block-stats">
+                        <span>30 случайных слов</span>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('words-list-block').addEventListener('click', () => {
+                const blocks = currentHSK === 3 ? hsk3Blocks : hsk4Blocks;
+                const container = document.getElementById('blocks-container');
+                container.innerHTML = '';
+                
+                blocks.forEach(block => {
+                    const blockStats = getBlockStats(currentHSK, block.id);
+                    const progress = (blockStats.mastered / block.count * 100) || 0;
+                    
+                    container.innerHTML += `
+                        <div class="level-block-card" data-block="${block.id}">
+                            <div class="level-block-header">
+                                <span class="level-block-icon">${block.icon}</span>
+                                <span class="level-block-title">${block.name}</span>
+                            </div>
+                            <div class="level-block-stats">
+                                <span>${blockStats.mastered}/${block.count}</span>
+                                <span>${Math.round(progress)}%</span>
+                            </div>
+                            <div style="height: 6px; background: #FFE4E1; border-radius: 3px; margin-top: 10px;">
+                                <div style="height: 100%; background: #8B0000; width: ${progress}%; border-radius: 3px;"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                document.querySelectorAll('[data-block]').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const blockId = parseInt(card.dataset.block);
+                        showBlockDetail(blockId);
+                    });
+                });
+                
+                const backBtn = document.createElement('div');
+                backBtn.innerHTML = '<button class="red-button" id="back-to-main-blocks" style="margin: 20px auto;">← Назад к меню</button>';
+                container.appendChild(backBtn);
+                document.getElementById('back-to-main-blocks')?.addEventListener('click', () => renderBlocksScreen());
             });
             
-            document.querySelectorAll('.block-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const blockId = parseInt(card.dataset.block);
-                    showBlockDetail(blockId);
-                });
+            document.getElementById('my-list-block').addEventListener('click', () => {
+                loadCustomWords();
+                renderCustomWordsList();
+                showScreen('my-list-screen');
+            });
+            
+            document.getElementById('quiz-block').addEventListener('click', () => {
+                showScreen('quiz-mode-screen');
             });
             
             updateReviewBanner(currentHSK);
@@ -3368,14 +3999,19 @@
         }
 
         window.openWordModal = function(wordId) {
-            const word = wordsData.find(w => w.id == wordId);
-            document.getElementById('modal-char').textContent = word.characters;
-            document.getElementById('modal-pinyin').textContent = word.pinyin;
-            document.getElementById('modal-translation').textContent = word.translation;
-            document.getElementById('modal-example').textContent = word.example;
-            document.getElementById('modal-example-trans').textContent = word.exampleTranslation;
-            document.getElementById('modal-audio').onclick = () => speak(word.characters);
-            document.getElementById('word-modal').classList.add('active');
+            let word = wordsData.find(w => w.id == wordId);
+            if (!word) {
+                word = customWords.find(w => w.id == wordId);
+            }
+            if (word) {
+                document.getElementById('modal-char').textContent = word.characters;
+                document.getElementById('modal-pinyin').textContent = word.pinyin;
+                document.getElementById('modal-translation').textContent = word.translation;
+                document.getElementById('modal-example').textContent = word.example;
+                document.getElementById('modal-example-trans').textContent = word.exampleTranslation;
+                document.getElementById('modal-audio').onclick = () => speak(word.characters);
+                document.getElementById('word-modal').classList.add('active');
+            }
         };
 
         function showBlockCompleteScreen(blockName) {
@@ -3402,31 +4038,23 @@
         // Инициализация
         loadUsers();
         loadUserProgress();
+        loadCustomWords();
 
         // ============================================
         // ОБРАБОТЧИКИ СОБЫТИЙ
         // ============================================
 
-        // Обработчики авторизации
         document.getElementById('login-btn').addEventListener('click', () => {
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
-            console.log('=== ПОПЫТКА ВХОДА ===');
-            console.log('Email:', email);
-            console.log('Пароль:', password);
-            console.log('Текущие пользователи в системе:', users);
-            console.log('localStorage.getItem("hsk_users"):', localStorage.getItem('hsk_users'));
-
             if (users[email] && users[email].password === password) {
-                console.log('УСПЕХ! Входим...');
                 currentUser = email;
                 loadUserProgress();
                 updateUserUI();
                 showScreen('hsk-screen');
             } else {
-                console.log('ОШИБКА: пользователь не найден или пароль неверный');
-                alert('Неверный email или пароль. Проверьте консоль для отладки.');
+                alert('Неверный email или пароль');
             }
         });
 
@@ -3477,12 +4105,10 @@
             showScreen('hsk-screen');
         });
 
-        // Обработчики выхода
         document.querySelectorAll('[id^="logout-btn"]').forEach(btn => {
             btn.addEventListener('click', logout);
         });
 
-        // Обработчики HSK карточек
         document.querySelectorAll('.hsk-card').forEach(card => {
             card.addEventListener('click', () => {
                 document.querySelectorAll('.hsk-card').forEach(c => c.classList.remove('active'));
@@ -3491,7 +4117,6 @@
             });
         });
 
-        // Навигационные обработчики
         document.getElementById('select-hsk-btn').addEventListener('click', () => {
             document.getElementById('hsk-level-title').textContent = `HSK ${currentHSK}`;
             renderBlocksScreen();
@@ -3503,10 +4128,22 @@
         });
 
         document.getElementById('back-to-blocks').addEventListener('click', () => {
+            renderBlocksScreen();
             showScreen('blocks-screen');
         });
 
-        // Обработчики тренировки
+        document.getElementById('back-to-hsk-from-mylist').addEventListener('click', () => {
+            showScreen('hsk-screen');
+        });
+
+        document.getElementById('back-to-hsk-from-quiz').addEventListener('click', () => {
+            showScreen('hsk-screen');
+        });
+
+        document.getElementById('back-to-quiz-mode').addEventListener('click', () => {
+            showScreen('quiz-mode-screen');
+        });
+
         document.getElementById('study-block-btn').addEventListener('click', () => {
             startStudy(currentHSK, currentBlock, true);
         });
@@ -3537,7 +4174,56 @@
             }
         });
 
-        // Модальное окно
+        document.getElementById('show-add-word-modal').addEventListener('click', () => {
+            document.getElementById('add-word-modal').classList.add('active');
+        });
+
+        document.getElementById('close-add-word-modal').addEventListener('click', () => {
+            document.getElementById('add-word-modal').classList.remove('active');
+        });
+
+        document.getElementById('save-word-btn').addEventListener('click', () => {
+            const characters = document.getElementById('new-word-characters').value.trim();
+            const pinyin = document.getElementById('new-word-pinyin').value.trim();
+            const translation = document.getElementById('new-word-translation').value.trim();
+            const example = document.getElementById('new-word-example').value.trim();
+            const exampleTranslation = document.getElementById('new-word-example-trans').value.trim();
+            
+            if (!characters || !pinyin || !translation) {
+                alert('Пожалуйста, заполните иероглиф, пиньинь и перевод');
+                return;
+            }
+            
+            addCustomWord(characters, pinyin, translation, example, exampleTranslation);
+            document.getElementById('add-word-modal').classList.remove('active');
+            
+            document.getElementById('new-word-characters').value = '';
+            document.getElementById('new-word-pinyin').value = '';
+            document.getElementById('new-word-translation').value = '';
+            document.getElementById('new-word-example').value = '';
+            document.getElementById('new-word-example-trans').value = '';
+        });
+
+        document.getElementById('quiz-mode-chinese-btn').addEventListener('click', () => {
+            startQuiz('chinese');
+        });
+
+        document.getElementById('quiz-mode-russian-btn').addEventListener('click', () => {
+            startQuiz('russian');
+        });
+
+        document.getElementById('quiz-card').addEventListener('click', () => {
+            flipCard();
+        });
+
+        document.getElementById('quiz-correct-btn').addEventListener('click', () => {
+            correctAnswer();
+        });
+
+        document.getElementById('quiz-wrong-btn').addEventListener('click', () => {
+            wrongAnswer();
+        });
+
         document.getElementById('modal-close').addEventListener('click', () => {
             document.getElementById('word-modal').classList.remove('active');
         });
@@ -3548,7 +4234,6 @@
             }
         });
 
-        // Экран завершения блока
         document.getElementById('review-10-btn').addEventListener('click', () => {
             const allWords = getWordsByLevelAndBlock(currentHSK, currentBlock);
             studyWords = allWords.filter(w => w.mastered >= 5).slice(0, 10);
@@ -3565,20 +4250,16 @@
         });
 
         document.getElementById('back-to-blocks-complete').addEventListener('click', () => {
+            renderBlocksScreen();
             showScreen('blocks-screen');
         });
 
-        // Сохранение прогресса при закрытии
         window.addEventListener('beforeunload', () => {
             saveUserProgress();
         });
         
         window.speechSynthesis.getVoices();
 
-        // ============================================
-        // SERVICE WORKER
-        // ============================================
-        
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('/sw.js')
@@ -3587,37 +4268,24 @@
             });
         }
 
-        // ============================================
-        // УТИЛИТЫ ДЛЯ PWA
-        // ============================================
-        
-        // Очистка кэша
         window.clearAppCache = function() {
             if ('caches' in window) {
                 caches.keys().then(names => {
                     names.forEach(name => {
                         caches.delete(name);
-                        console.log('🗑️ Кэш удалён:', name);
                     });
                 });
                 alert('✅ Кэш очищен! Перезапустите приложение.');
             }
         };
 
-        // Отладка авторизации
         window.debugAuth = function() {
-            console.log('=== 🔍 ОТЛАДОЧНАЯ ИНФОРМАЦИЯ ===');
-            console.log('📊 users:', typeof users !== 'undefined' ? users : 'не определено');
-            console.log('💾 localStorage:', localStorage.getItem('hsk_users'));
-            console.log('👤 currentUser:', typeof currentUser !== 'undefined' ? currentUser : 'не определено');
-            console.log('📱 PWA режим:', window.navigator.standalone ? 'Да' : 'Нет');
-            alert('✅ Информация в консоли (нажмите F12)');
+            console.log('users:', users);
+            alert('Информация в консоли');
         };
     </script>
 
-    <!-- СКРИПТ ДЛЯ КОНСОЛИ ОТЛАДКИ -->
     <script>
-        // Перехватываем все console.log
         window.debugLogs = [];
         window.originalConsoleLog = console.log;
         window.originalConsoleError = console.error;
@@ -3662,11 +4330,6 @@
                 if (consoleEl.style.display === 'none' || consoleEl.style.display === '') {
                     consoleEl.style.display = 'block';
                     updateDebugDisplay();
-                    
-                    console.log('=== 🚀 СОСТОЯНИЕ ПРИЛОЖЕНИЯ ===');
-                    console.log('📱 PWA режим:', window.navigator.standalone ? 'ДА' : 'НЕТ');
-                    console.log('🔗 URL:', window.location.href);
-                    console.log('🕒 Время:', new Date().toLocaleTimeString());
                 } else {
                     consoleEl.style.display = 'none';
                 }
@@ -3679,64 +4342,15 @@
         };
 
         window.testLogin = function() {
-            console.log('=== 🔍 ТЕСТ ВХОДА ===');
-            console.log('1️⃣ users объект:', typeof users !== 'undefined' ? 'Есть (' + Object.keys(users).length + ' пользователей)' : '❌ НЕТ');
-            console.log('2️⃣ localStorage:', localStorage.getItem('hsk_users') ? '✅ Есть данные' : '❌ Нет данных');
-            
+            console.log('=== ТЕСТ ВХОДА ===');
             const email = document.getElementById('login-email')?.value;
-            const password = document.getElementById('login-password')?.value;
-            console.log('3️⃣ Введённый email:', email || '❌ не введён');
-            console.log('4️⃣ Введённый пароль:', password ? '✅ введён' : '❌ не введён');
-            
+            console.log('Email:', email);
             if (users && users[email]) {
-                console.log('5️⃣ Пользователь найден в users');
-                console.log('6️⃣ Хранимый пароль:', users[email].password);
-                console.log('7️⃣ Пароль совпадает:', users[email].password === password ? '✅ ДА' : '❌ НЕТ');
-                console.log('8️⃣ Имя пользователя:', users[email].name || 'не указано');
+                console.log('Пользователь найден');
             } else {
-                console.log('5️⃣ Пользователь НЕ найден в users');
-                if (users) {
-                    console.log('6️⃣ Доступные email:', Object.keys(users).join(', ') || 'нет пользователей');
-                } else {
-                    console.log('6️⃣ users не определен');
-                }
+                console.log('Пользователь не найден');
             }
-            
-            console.log('9️⃣ Проверка кнопок:');
-            console.log('   - login-btn:', document.getElementById('login-btn') ? '✅' : '❌');
-            console.log('   - register-btn:', document.getElementById('register-btn') ? '✅' : '❌');
-            console.log('   - guest-link:', document.getElementById('guest-link') ? '✅' : '❌');
-            console.log('   - register-submit-btn:', document.getElementById('register-submit-btn') ? '✅' : '❌');
-            console.log('   - debugConsole:', document.getElementById('debugConsole') ? '✅' : '❌');
         };
-
-        // Логируем ошибки
-        window.addEventListener('error', (e) => {
-            console.error('❌ ОШИБКА: ' + e.message + ' в ' + e.filename + ':' + e.lineno);
-        });
-
-        window.addEventListener('unhandledrejection', (e) => {
-            console.error('❌ НЕОБРАБОТАННЫЙ ПРОМИС:', e.reason);
-        });
-
-        // Автоматическая диагностика
-        window.addEventListener('load', () => {
-            console.log('✅ Страница полностью загружена');
-            console.log('📱 PWA режим:', window.navigator.standalone ? 'ДА' : 'НЕТ');
-            
-            setTimeout(() => {
-                console.log('⏱️ Проверка users:', users ? '✅ OK (' + Object.keys(users).length + ')' : '❌ НЕТ');
-            }, 1000);
-        });
-
-        // Принудительная инициализация
-        (function initialize() {
-            console.log('🚀 Инициализация приложения...');
-            if (typeof loadUsers === 'function') {
-                loadUsers();
-            }
-        })();
     </script>
-
 </body>
 </html>
